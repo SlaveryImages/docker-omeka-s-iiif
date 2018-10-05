@@ -1,0 +1,11 @@
+FROM boredland:omeka-s-docker
+
+RUN cd /var/www/html/modules && curl "https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.10/IiifServer.zip" && unzip IiifServer.zip
+RUN cd /var/www/html/modules/IiifServer && composer install
+
+# enable the CORS header module of apache
+RUN a2enmod headers
+
+COPY ./htaccessmods htaccessmods
+RUN cat htaccessmods >> /var/www/html/.htaccess
+
