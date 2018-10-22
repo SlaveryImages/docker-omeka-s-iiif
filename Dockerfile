@@ -39,6 +39,7 @@ RUN cd /var/www/html/
 #RUN node -v
 RUN npm -v
 RUN cd /var/www/html/ && npm install
+RUN cd /var/www/html/ && npm install gulp@next
 RUN cd /var/www/html/ && npm install --global gulp-cli 
 RUN cd /var/www/html/ && gulp init
 
@@ -67,4 +68,4 @@ RUN a2enmod headers
 
 COPY ./htaccessmods htaccessmods
 RUN cat htaccessmods >> /var/www/html/.htaccess
-
+COPY ./files/local.config.php /var/www/html/config/local.config.php
