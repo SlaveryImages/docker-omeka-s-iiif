@@ -69,3 +69,7 @@ RUN a2enmod headers
 COPY ./htaccessmods htaccessmods
 RUN cat htaccessmods >> /var/www/html/.htaccess
 COPY ./files/local.config.php /var/www/html/config/local.config.php
+
+RUN rm -r /var/www/html/modules/CSVImport
+ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v1.1.0/CSVImport-1.1.0.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip CSVImport-1.1.0.zip
