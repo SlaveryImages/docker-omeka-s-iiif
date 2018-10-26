@@ -39,7 +39,6 @@ RUN cd /var/www/html/
 #RUN node -v
 RUN npm -v
 RUN cd /var/www/html/ && npm install
-RUN cd /var/www/html/ && npm install gulp@next
 RUN cd /var/www/html/ && npm install --global gulp-cli 
 RUN cd /var/www/html/ && gulp init
 
