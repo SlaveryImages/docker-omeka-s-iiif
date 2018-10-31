@@ -59,8 +59,8 @@ EXPOSE 80
 ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.10/IiifServer.zip /var/www/html/modules/
 RUN cd /var/www/html/modules && unzip IiifServer.zip
 
-ADD https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/3.5.8/UniversalViewer.zip /var/www/html/modules
-RUN cd /var/www/html/modules/ && unzip UniversalViewer.zip
+ADD https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip /var/www/html/modules
+RUN cd /var/www/html/modules/ && unzip build.zip
 
 # enable the CORS header module of apache
 RUN a2enmod headers
