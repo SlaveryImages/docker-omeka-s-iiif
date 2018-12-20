@@ -40,6 +40,7 @@ RUN cd /var/www/html/
 RUN npm -v
 RUN cd /var/www/html/ && npm install
 RUN cd /var/www/html/ && npm install --global gulp-cli 
+RUN cd /var/www/html/ && npm install gulp@next
 RUN cd /var/www/html/ && gulp init
 
 # Clone all the Omeka-S Modules
@@ -59,8 +60,8 @@ EXPOSE 80
 ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.10/IiifServer.zip /var/www/html/modules/
 RUN cd /var/www/html/modules && unzip IiifServer.zip
 
-ADD https://github.com/Daniel-KM/Omeka-S-module-UniversalViewer/releases/download/3.5.8/UniversalViewer.zip /var/www/html/modules
-RUN cd /var/www/html/modules/ && unzip UniversalViewer.zip
+ADD https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip /var/www/html/modules
+RUN cd /var/www/html/modules/ && unzip build.zip
 
 # enable the CORS header module of apache
 RUN a2enmod headers
@@ -73,8 +74,11 @@ RUN rm -r /var/www/html/modules/CSVImport
 ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v1.1.0/CSVImport-1.1.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip CSVImport-1.1.0.zip
 
+<<<<<<< HEAD
 ADD https://github.com/zerocrates/HideProperties/releases/download/v1.0.0/HideProperties-1.0.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip HideProperties-1.0.0.zip
+
+RUN curl http://mirador.britishart.yale.edu/build/mirador/mirador.js >> /var/www/html/modules/build/mirador/mirador.js
 
 ADD https://github.com/digirati-co-uk/omeka-google-analytics-module/archive/v1.0.1.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip v1.0.1.zip
