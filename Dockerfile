@@ -72,3 +72,10 @@ COPY ./files/local.config.php /var/www/html/config/local.config.php
 RUN rm -r /var/www/html/modules/CSVImport
 ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v1.1.0/CSVImport-1.1.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip CSVImport-1.1.0.zip
+
+ADD https://github.com/zerocrates/HideProperties/releases/download/v1.0.0/HideProperties-1.0.0.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip HideProperties-1.0.0.zip
+
+ADD https://github.com/digirati-co-uk/omeka-google-analytics-module/archive/v1.0.1.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip v1.0.1.zip
+RUN mv /var/www/html/modules/omeka-google-analytics-module /var/www/html/modules/GoogleAnalytics
