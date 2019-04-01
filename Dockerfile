@@ -57,8 +57,8 @@ RUN chmod -R +w /var/www/html/files
 EXPOSE 80
 
 
-ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.10/IiifServer.zip /var/www/html/modules/
-RUN cd /var/www/html/modules && unzip IiifServer.zip
+ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.14/IiifServer-3.5.14.zip /var/www/html/modules/
+RUN cd /var/www/html/modules && unzip IiifServer-3.5.14.zip
 
 ADD https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip /var/www/html/modules
 RUN cd /var/www/html/modules/ && unzip build.zip
@@ -82,3 +82,5 @@ RUN curl http://mirador.britishart.yale.edu/build/mirador/mirador.js >> /var/www
 ADD https://github.com/digirati-co-uk/omeka-google-analytics-module/archive/v1.0.1.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip v1.0.1.zip
 RUN mv /var/www/html/modules/omeka-google-analytics-module-1.0.1 /var/www/html/modules/GoogleAnalytics
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
