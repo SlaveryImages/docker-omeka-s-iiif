@@ -1,4 +1,4 @@
-FROM php:apache
+FROM php:7.3-apache
 MAINTAINER Jonas Strassel <jo.strassel@gmail.com>
 # Install git ant and java
 RUN apt-get update && apt-get -y install gnupg
@@ -7,6 +7,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install \
     git-core \
     nodejs \
+    npm \
     apt-utils \
     zip \
     unzip \
@@ -16,17 +17,20 @@ RUN apt-get -y install \
     libpng-dev \
     libmemcached-dev \
     zlib1g-dev \
+    libicu-dev \
+    g++ \
     imagemagick
 # Install php-extensions
-RUN pecl install mcrypt-1.0.1
+RUN pecl install mcrypt-1.0.2
 RUN docker-php-ext-enable mcrypt
 
-RUN docker-php-ext-install -j$(nproc) iconv pdo pdo_mysql gd
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install -j$(nproc) iconv pdo pdo_mysql gd intl
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 # Clone omeka-s - replace with git clone...
 
 RUN rm -rf /var/www/html/*
-RUN git clone https://github.com/omeka/omeka-s.git /var/www/html
+RUN git clone --branch master https://github.com/omeka/omeka-s.git /var/www/html
 
 # enable the rewrite module of apache
 RUN a2enmod rewrite
@@ -37,10 +41,11 @@ COPY files/php.ini /usr/local/etc/php/
 RUN cd /var/www/html/
 # && ant init
 #RUN node -v
-RUN npm -v
+RUN npm install -g npm@next
 RUN cd /var/www/html/ && npm install
 RUN cd /var/www/html/ && npm install --global gulp-cli 
-RUN cd /var/www/html/ && npm install gulp@next
+RUN cd /var/www/html/ && npm install gulp -g
+RUN cat /var/www/html/composer.json
 RUN cd /var/www/html/ && gulp init
 
 # Clone all the Omeka-S Modules
@@ -54,11 +59,11 @@ COPY ./files/apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R +w /var/www/html/files
 # Expose the Port we'll provide Omeka on
-EXPOSE 80
+EXPOSE 8080
 
 
-ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.14/IiifServer-3.5.14.zip /var/www/html/modules/
-RUN cd /var/www/html/modules && unzip IiifServer-3.5.14.zip
+ADD https://github.com/Daniel-KM/Omeka-S-module-IiifServer/releases/download/3.5.15/IiifServer-3.5.15.zip /var/www/html/modules/
+RUN cd /var/www/html/modules && unzip IiifServer-3.5.15.zip
 
 ADD https://github.com/ProjectMirador/mirador/releases/download/v2.6.0/build.zip /var/www/html/modules
 RUN cd /var/www/html/modules/ && unzip build.zip
@@ -68,6 +73,7 @@ RUN a2enmod headers
 
 COPY ./htaccessmods htaccessmods
 RUN cat htaccessmods >> /var/www/html/.htaccess
+# COPY ./htaccessmods /var/www/html.htaccess
 COPY ./files/local.config.php /var/www/html/config/local.config.php
 
 RUN rm -r /var/www/html/modules/CSVImport
@@ -84,3 +90,9 @@ RUN cd /var/www/html/modules && unzip v1.0.1.zip
 RUN mv /var/www/html/modules/omeka-google-analytics-module-1.0.1 /var/www/html/modules/GoogleAnalytics
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ADD https://github.com/vachanda/SimpleCarousel-Custom/releases/download/v1.0.0/SimpleCarousel.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip SimpleCarousel.zip -d SimpleCarousel
+
+ADD https://github.com/vachanda/image-map/releases/download/v2.0.0/ImageMap.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip ImageMap.zip -d ImageMap
