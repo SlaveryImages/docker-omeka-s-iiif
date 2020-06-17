@@ -91,8 +91,8 @@ RUN mv /var/www/html/modules/omeka-google-analytics-module-1.0.1 /var/www/html/m
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-ADD https://github.com/vachanda/SimpleCarousel-Custom/releases/download/v1.0.0/SimpleCarousel.zip /var/www/html/modules
-RUN cd /var/www/html/modules && unzip SimpleCarousel.zip -d SimpleCarousel
+ADD https://github.com/SlaveryImages/SimpleCarousel-Custom/archive/v1.0.1.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip v1.0.1.zip -d SimpleCarousel
 
 ADD https://github.com/vachanda/image-map/releases/download/v2.0.0/ImageMap.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip ImageMap.zip -d ImageMap
