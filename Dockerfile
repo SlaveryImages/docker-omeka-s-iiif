@@ -80,8 +80,8 @@ RUN rm -r /var/www/html/modules/CSVImport
 ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v1.1.0/CSVImport-1.1.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip CSVImport-1.1.0.zip
 
-ADD https://github.com/zerocrates/HideProperties/releases/download/v1.0.0/HideProperties-1.0.0.zip /var/www/html/modules
-RUN cd /var/www/html/modules && unzip HideProperties-1.0.0.zip
+ADD https://github.com/zerocrates/HideProperties/releases/download/v1.1.0/HideProperties-1.1.0.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip HideProperties-1.1.0.zip
 
 RUN curl http://mirador.britishart.yale.edu/build/mirador/mirador.js >> /var/www/html/modules/build/mirador/mirador.js
 
