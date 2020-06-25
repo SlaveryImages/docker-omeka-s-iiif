@@ -93,6 +93,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 ADD https://github.com/SlaveryImages/SimpleCarousel-Custom/archive/v1.0.1.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip v1.0.1.zip -d SimpleCarousel
+RUN mv /var/www/html/modules/SimpleCarousel/*/* /var/www/html/modules/SimpleCarousel/
 
 ADD https://github.com/vachanda/image-map/releases/download/v2.0.0/ImageMap.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip ImageMap.zip -d ImageMap
