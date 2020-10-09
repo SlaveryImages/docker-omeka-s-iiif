@@ -1,4 +1,4 @@
-docker run -d  --name slaveryimages -p 80:80 \
+docker run -d --name slaveryimages -p 80:80 \
 -v /home/slaveryimages/database.ini:/var/www/html/config/database.ini  \
 -v /home/slaveryimages/omeka_files:/var/www/html/files \
 -v /home/slaveryimages/omeka_logs:/var/www/html/logs  \
