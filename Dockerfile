@@ -29,8 +29,11 @@ RUN docker-php-ext-install -j$(nproc) iconv pdo pdo_mysql gd intl
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 # Clone omeka-s - replace with git clone...
 
+RUN echo 'foo'
+RUN echo 'bar'
+
 RUN rm -rf /var/www/html/*
-RUN git clone --branch master https://github.com/omeka/omeka-s.git /var/www/html
+RUN git clone --branch v2.1.2 https://github.com/omeka/omeka-s.git /var/www/html
 
 # enable the rewrite module of apache
 RUN a2enmod rewrite
@@ -48,6 +51,8 @@ RUN cd /var/www/html/ && npm install gulp -g
 RUN cat /var/www/html/composer.json
 RUN cd /var/www/html/ && gulp init
 
+
+RUN echo "CLONING"
 # Clone all the Omeka-S Modules
 RUN cd /var/www/html/modules && curl "https://api.github.com/users/omeka-s-modules/repos?page=$PAGE&per_page=100" | grep -e 'git_url*' | cut -d \" -f 4 | xargs -L1 git clone
 # Clone all the Omeka-S Themes
@@ -76,9 +81,16 @@ RUN cat htaccessmods >> /var/www/html/.htaccess
 # COPY ./htaccessmods /var/www/html.htaccess
 COPY ./files/local.config.php /var/www/html/config/local.config.php
 
+
+# This overwrites the FileSideload module with version 1.3.0, which only requires Omeka-S 2.1.2 instead of 3.0 (as 1.4 requires)
+RUN rm -r /var/www/html/modules/FileSideload
+ADD https://github.com/omeka-s-modules/FileSideload/releases/download/v1.3.0/FileSideload-1.3.0.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip FileSideload-1.3.0.zip
+
+# This overwrites the default CSV import with a version 1.1, which was important two years ago but maybe not now
 RUN rm -r /var/www/html/modules/CSVImport
-ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v1.1.0/CSVImport-1.1.0.zip /var/www/html/modules
-RUN cd /var/www/html/modules && unzip CSVImport-1.1.0.zip
+ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v2.1.2/CSVImport-2.1.2.zip /var/www/html/modules
+RUN cd /var/www/html/modules && unzip CSVImport-2.1.2.zip
 
 ADD https://github.com/zerocrates/HideProperties/releases/download/v1.1.0/HideProperties-1.1.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip HideProperties-1.1.0.zip
