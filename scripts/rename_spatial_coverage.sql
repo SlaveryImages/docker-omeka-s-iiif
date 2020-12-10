@@ -1,0 +1,28 @@
+UPDATE value SET value='Africa--Western Bight' where property_id=40 AND value='Africa--Bight of Benin';
+UPDATE value SET value='Africa--Eastern Bight' where property_id=40 AND value='Africa--Bight of Biafra';
+UPDATE value SET value='Africa--Cabo Verde' where property_id=40 AND value='Africa--Cabo Verde Islands';
+UPDATE value SET value='Africa--Rainforest' where property_id=40 AND value='Africa--Central Interior';
+UPDATE value SET value='Africa--Comoros' where property_id=40 AND value='Africa--Comoros Islands';
+UPDATE value SET value='Africa--Gulf Islands' where property_id=40 AND value='Africa--Gulf of Guinea Islands';
+UPDATE value SET value='Africa--West Central North' where property_id=40 AND value='Africa--Kwanza North';
+UPDATE value SET value='Africa--West Central South' where property_id=40 AND value='Africa--Kwanza South';
+UPDATE value SET value='Africa--West Central North' where property_id=40 AND value='Africa--Loango Coast';
+UPDATE value SET value='Africa--Mascarenes' where property_id=40 AND value='Africa--Mascarene Islands';
+UPDATE value SET value='Africa--Western Savanna' where property_id=40 AND value='Africa--Senegambia';
+UPDATE value SET value='Africa--Southeast' where property_id=40 AND value='Africa--Southeast Coast';
+UPDATE value SET value='Africa--Rivers' where property_id=40 AND value='Africa--Upper Guinea Coast';
+commit;
+
+UPDATE value SET value=replace(value, 'Bight of Benin', 'Western Bight') where property_id=40 AND value LIKE 'Africa--Bight of Benin%';
+UPDATE value SET value=replace(value, 'Bight of Biafra', 'Eastern Bight') where property_id=40 AND value LIKE 'Africa--Bight of Biafra%';
+UPDATE value SET value=replace(value, 'Cabo Verde Islands', 'Cabo Verde') where property_id=40 AND value LIKE 'Africa--Cabo Verde Islands%';
+UPDATE value SET value=replace(value, 'Central Interior', 'Rainforest') where property_id=40 AND value LIKE 'Africa--Central Interior%';
+UPDATE value SET value=replace(value, 'Comoros Islands', 'Comoros') where property_id=40 AND value LIKE 'Africa--Comoros Islands%';
+UPDATE value SET value=replace(value, 'Gulf of Guinea Islands', 'Gulf Islands') where property_id=40 AND value LIKE 'Africa--Gulf of Guinea Islands%';
+UPDATE value SET value=replace(value, 'Kwanza North', 'West Central North') where property_id=40 AND value LIKE 'Africa--Kwanza North%';
+UPDATE value SET value=replace(value, 'Kwanza South', 'West Central South') where property_id=40 AND value LIKE 'Africa--Kwanza South%';
+UPDATE value SET value=replace(value, 'Loango Coast', 'West Central North') where property_id=40 AND value LIKE 'Africa--Loango Coast%';
+UPDATE value SET value=replace(value, 'Mascarene Islands', 'Mascarenes') where property_id=40 AND value LIKE 'Africa--Mascarene Islands%';
+UPDATE value SET value=replace(value, 'Senegambia', 'Western Savanna') where property_id=40 AND value LIKE 'Africa--Senegambia%';
+UPDATE value SET value=replace(value, 'Southeast Coast', 'Southeast') where property_id=40 AND value LIKE 'Africa--Southeast Coast%';
+UPDATE value SET value=replace(value, 'Upper Guinea Coast', 'Rivers') where property_id=40 AND value LIKE 'Africa--Upper Guinea Coast%';
