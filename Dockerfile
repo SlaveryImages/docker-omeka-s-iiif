@@ -87,7 +87,7 @@ RUN rm -r /var/www/html/modules/FileSideload
 ADD https://github.com/omeka-s-modules/FileSideload/releases/download/v1.3.0/FileSideload-1.3.0.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip FileSideload-1.3.0.zip
 
-# This overwrites the default CSV import with a version 1.1, which was important two years ago but maybe not now
+# This overwrites the default CSV import with a version supporting Omeka 2
 RUN rm -r /var/www/html/modules/CSVImport
 ADD https://github.com/omeka-s-modules/CSVImport/releases/download/v2.1.2/CSVImport-2.1.2.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip CSVImport-2.1.2.zip
@@ -109,3 +109,4 @@ RUN mv /var/www/html/modules/SimpleCarousel/*/* /var/www/html/modules/SimpleCaro
 
 ADD https://github.com/vachanda/image-map/releases/download/v2.0.0/ImageMap.zip /var/www/html/modules
 RUN cd /var/www/html/modules && unzip ImageMap.zip -d ImageMap
+
