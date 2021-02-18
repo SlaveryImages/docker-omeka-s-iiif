@@ -3,6 +3,7 @@ docker run -d --rm --name slaveryimages -p 80:80 \
 -v /c/Users/Brumfield/omeka_files:/var/www/html/files \
 -v /c/Users/Brumfield/omeka_logs:/var/www/html/logs  \
 -v /c/Users/Brumfield/omeka-s-theme-slavery-images:/var/www/html/themes/omeka-s-theme-slavery-images \
+-v /c/Users/Brumfield/slaveryimages/omeka-s-theme-yoruba-diaspora:/var/www/html/themes/omeka-s-theme-yoruba-diaspora \
 -v /c/Users/Brumfield/sideload_images:/var/www/html/sideload_images \
 -v /c/Users/Brumfield/Mirador:/var/www/html/modules/Mirador \
 -v /c/Users/Brumfield/Mapping:/var/www/html/modules/Mapping \
