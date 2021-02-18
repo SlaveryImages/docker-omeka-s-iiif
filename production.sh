@@ -5,5 +5,6 @@ docker run -d --name slaveryimages -p 80:80 \
 -v /home/slaveryimages/omeka-s-theme-slavery-images:/var/www/html/themes/omeka-s-theme-slavery-images \
 -v /home/slaveryimages/image_upload:/var/www/html/sideload_images \
 -v /home/slaveryimages/Mirador:/var/www/html/modules/Mirador \
+-v /home/slaveryimages/Mapping:/var/www/html/modules/Mapping \
 --restart unless-stopped \
 slaveryimages --net="host"
